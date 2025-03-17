@@ -1,0 +1,14 @@
+__pycache__/
+.idea/
+.obsidian/
+.run/
+.venv/
+.vscode/
+build/
+dist/
+
+*.log
+*.spec
+*.sqlite
+*.zip
+TODO.md
