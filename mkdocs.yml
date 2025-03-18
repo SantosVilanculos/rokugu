@@ -1,0 +1,34 @@
+# https://www.mkdocs.org/user-guide/configuration/
+
+site_name: Rokugu
+site_url: https://santosvilanculos.github.io/rokugu/
+
+repo_url: https://github.com/santosvilanculos/rokugu/
+repo_name: santosvilanculos/rokugu
+edit_uri: tree/main/docs
+
+site_author: Santos Vilanculos
+site_description: An opinionated PySide6 library that delivers ready-to-use components and utilities.
+copyright: © 2025 Santos Vilanculos. All rights reserved.
+
+exclude_docs: |
+  requirements.txt
+
+theme:
+  name: material
+  locale: en
+
+# extra_css:
+# extra_javascript:
+
+watch:
+  - src
+
+markdown_extensions:
+  - attr_list
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["src/rokugu"]
