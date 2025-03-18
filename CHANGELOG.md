@@ -9,7 +9,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- (Placeholder) Future features and enhancements will be listed here.
+- `IconButton`: disabled mouse events propagation and enabled focus events
+- `ListWidget` enable tab key navigation
+
+### Changed
+
+- `Router` rename append method, initial_name parametter and widget_appended signal
+  1. append -> add
+  2. initial_name -> default
+  3. widget_appended -> widget_added
+- `Listing`:
+  1. renamed to `ListWidget`
+     only expose select and remove functions
+  2. Remove item insertion and filtering methods
+  3. `changed` event not only passes a QItemWidgetItem object
+
+### Fixed
+
+- `IconButton`: import Widget from internall package
+
+### Removed
+
+- Remove bundle_path method from support module. The removal is because the method is related to pyinstaller and not all
+  that may use this library will use it
 
 ## [0.0.1] - 2025-03-17
 
