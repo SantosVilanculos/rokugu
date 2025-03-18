@@ -1,4 +1,3 @@
-import sys
 from os import PathLike
 from pathlib import Path
 from typing import Union
@@ -6,17 +5,19 @@ from typing import Union
 from PySide6.QtCore import QStandardPaths
 
 
-def bundle_path(path: Union[Path, str] = "") -> Path:
-    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-        return Path(sys._MEIPASS).joinpath(path)
-
-    return Path().cwd().joinpath(path)
-
-
 def standard_path(
     standard_location: QStandardPaths.StandardLocation,
     *other: Union[str, PathLike[str]],
 ) -> Path:
+    """
+    Args:
+        standard_location: Lorem ipsum
+        *other: Lorem ipsum
+    Examples:
+
+        standard_path(QStandardPaths.StandardLocation.AppDataLocation,'database.sqlite')
+        /home/user/.local/share/example/database.sqlite
+    """
     path = Path(QStandardPaths.writableLocation(standard_location))
     path.mkdir(parents=True, exist_ok=True)
     return path.joinpath(*other)
