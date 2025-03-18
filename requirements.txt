@@ -10,5 +10,6 @@ pyinstaller_versionfile==3.0.0
 PySide6==6.8.2.1
 setuptools==76.0.0
 SQLAlchemy==2.0.38
+taskipy==1.14.1
 twine==6.1.0
 wheel==0.45.1
