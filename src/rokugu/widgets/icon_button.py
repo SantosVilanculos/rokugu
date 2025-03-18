@@ -1,11 +1,12 @@
 from pathlib import Path
 from typing import Union
 
-from framework.widgets.widget import Widget
 from PySide6.QtCore import QFileInfo, QSize
 from PySide6.QtGui import Qt
 from PySide6.QtSvgWidgets import QSvgWidget
 from PySide6.QtWidgets import QSizePolicy, QVBoxLayout
+
+from rokugu.widgets.widget import Widget
 
 
 class IconButton(Widget):
