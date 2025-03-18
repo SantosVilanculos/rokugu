@@ -20,6 +20,8 @@ class IconButton(Widget):
         elif isinstance(path, Path):
             path = path.as_posix()
 
+        self.setAttribute(Qt.WidgetAttribute.WA_NoMousePropagation)
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.setSizePolicy(
             QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
         )
