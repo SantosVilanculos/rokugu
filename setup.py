@@ -12,6 +12,7 @@ setup(
     author_email="santosvilanculos@yahoo.com",
     url="http://github.com/SantosVilanculos/rokugu",
     license="MIT",
+    keywords=["Qt6", "PySide6"],
     package_dir={"": "src"},
     python_requires=">=3.12",
     requires=["setuptools", "wheel"],
