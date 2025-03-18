@@ -13,6 +13,7 @@ class ListWidget(QListWidget):
         self.setVerticalScrollMode(QListWidget.ScrollMode.ScrollPerPixel)
         self.setResizeMode(QListWidget.ResizeMode.Adjust)
         self.setUniformItemSizes(False)
+        self.setTabKeyNavigation(True)
 
         self.itemActivated.connect(
             lambda q_list_widget_item: self.changed.emit(q_list_widget_item)
