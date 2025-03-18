@@ -5,12 +5,7 @@
 from typing import Optional, override
 
 from PySide6.QtCore import QMargins, QPoint, QRect, QSize, Qt
-from PySide6.QtWidgets import (
-    QLayout,
-    QLayoutItem,
-    QSizePolicy,
-    QWidget,
-)
+from PySide6.QtWidgets import QLayout, QLayoutItem, QSizePolicy, QWidget
 
 
 class FlowLayout(QLayout):

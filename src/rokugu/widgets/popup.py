@@ -1,9 +1,6 @@
 from PySide6.QtCore import QEvent, QPoint, QRect, Qt
 from PySide6.QtGui import QCursor, QMouseEvent
-from PySide6.QtWidgets import (
-    QApplication,
-    QFrame,
-)
+from PySide6.QtWidgets import QApplication, QFrame
 from typing_extensions import override
 
 
