@@ -3,11 +3,11 @@ from setuptools import setup
 setup(
     name="rokugu",
     version="0.0.1",
-    description="An opinionated PyQt/PySide6 component library.",
     long_description="An opinionated PyQt/PySide6 component library offering a collection of aesthetically pleasing and highly accessible UI components.",
     readme="./README.md",
     license="MIT",
     license_files=["./LICENSE"],
+    description="An opinionated PySide6 library that delivers ready-to-use components and utilities.",
     author="Santos Vilanculos",
     author_email="santosvilanculos@yahoo.com",
     url="http://github.com/SantosVilanculos/rokugu",
