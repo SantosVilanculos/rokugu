@@ -18,6 +18,8 @@ class Popup(QFrame):
     @override
     def show(self, q_point: QPoint = QCursor.pos(), /) -> None:
         """
+        Examples:
+
         ```py
         q_widget = QWidget()
         q_widget.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
@@ -63,11 +65,17 @@ class Popup(QFrame):
         return super().show()
 
     def showEvent(self, event, /):
-        QApplication.instance().installEventFilter(self)
+        q_application = QApplication.instance()
+
+        if q_application:
+            q_application.installEventFilter(self)
         super().showEvent(event)
 
     def hideEvent(self, event, /):
-        QApplication.instance().removeEventFilter(self)
+        q_application = QApplication.instance()
+
+        if q_application:
+            q_application.removeEventFilter(self)
         super().hideEvent(event)
 
     def eventFilter(self, watched, event: QEvent, /):
