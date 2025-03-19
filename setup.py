@@ -10,11 +10,15 @@ setup(
     long_description_content_type="text/markdown",
     author="Santos Vilanculos",
     author_email="santosvilanculos@yahoo.com",
-    url="http://github.com/SantosVilanculos/rokugu",
+    url="https://santosvilanculos.github.io/rokugu",
+    project_urls={
+        "Repository": "https://github.com/SantosVilanculos/rokugu",
+        "Bug Tracker": "https://github.com/SantosVilanculos/rokugu/issues",
+    },
     license="MIT",
     keywords=["Qt6", "PySide6"],
     package_dir={"": "src"},
-    python_requires=">=3.12",
+    python_requires=">=3.12,<4",
     requires=["setuptools", "wheel"],
     install_requires=[
         "pendulum",
