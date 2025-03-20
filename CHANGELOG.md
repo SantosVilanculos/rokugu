@@ -75,7 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `AutoLayout`: Automatically arranges child components.
   - `FlowLayout`: Arranges child components in a flow-like manner.
 
-[unreleased]: https://github.com/santosvilanculos/rokugu/compare/v0.0.3...HEAD
-[0.0.2]: https://github.com/santosvilanculos/rokugu/releases/tag/v0.0.2...v0.0.3
-[0.0.1]: https://github.com/santosvilanculos/rokugu/releases/tag/v0.0.0...v0.0.1
-[0.0.0]: https://github.com/santosvilanculos/rokugu/releases/tag/v0.0.0
+[unreleased]: https://github.com/rokugu/rokugu/compare/v0.0.3...HEAD
+[0.0.2]: https://github.com/rokugu/rokugu/releases/tag/v0.0.2...v0.0.3
+[0.0.1]: https://github.com/rokugu/rokugu/releases/tag/v0.0.0...v0.0.1
+[0.0.0]: https://github.com/rokugu/rokugu/releases/tag/v0.0.0
