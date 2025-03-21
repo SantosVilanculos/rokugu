@@ -14,15 +14,15 @@ class Router(QWidget):
     def __init__(self, default: Optional[str] = None) -> None:
         super().__init__()
 
-        self.q_shortcutional[str] = default
+        self._default: Optional[str] = default
 
         self._name_to_q_widget: Dict[str, weakref.ref[QWidget]] = dict()
         self._id_to_name: Dict[int, str] = dict()
         self._index_to_name: Dict[int, str] = dict()
 
-        self.q_stacked_layout = QStackedLayout(self)
-        self.q_stacked_layout.currentChanged.connect(self._current_changed)
-        self.q_stacked_layout.widgetRemoved.connect(self._widget_removed)
+        self._q_stacked_layout = QStackedLayout(self)
+        self._q_stacked_layout.currentChanged.connect(self._current_changed)
+        self._q_stacked_layout.widgetRemoved.connect(self._widget_removed)
 
     def add(self, name: str, q_widget: QWidget) -> int:
         if len(name) == 0:
@@ -31,7 +31,7 @@ class Router(QWidget):
         if name in self._name_to_q_widget:
             raise ValueError(f"QWidget with name '{name}' already exists")
 
-        index = self.q_stacked_layout.addWidget(q_widget)
+        index = self._q_stacked_layout.addWidget(q_widget)
 
         self._name_to_q_widget[name] = weakref.ref(q_widget)
         self._id_to_name[id(q_widget)] = name
@@ -48,7 +48,7 @@ class Router(QWidget):
         if name in self._name_to_q_widget:
             raise ValueError(f"QWidget with name '{name}' already exists")
 
-        index = self.q_stacked_layout.insertWidget(index, q_widget)
+        index = self._q_stacked_layout.insertWidget(index, q_widget)
 
         self._name_to_q_widget[name] = weakref.ref(q_widget)
         self._id_to_name[id(q_widget)] = name
@@ -60,7 +60,7 @@ class Router(QWidget):
             if _q_widget is None:
                 continue
 
-            _index = self.q_stacked_layout.indexOf(_q_widget)
+            _index = self._q_stacked_layout.indexOf(_q_widget)
 
             if _index == -1:
                 continue
@@ -87,15 +87,15 @@ class Router(QWidget):
 
     def remove(self, arg__1: Any) -> None:
         if isinstance(arg__1, QWidget):
-            self.q_stacked_layout.removeWidget(arg__1)
+            self._q_stacked_layout.removeWidget(arg__1)
 
         elif isinstance(arg__1, int):
-            q_widget = self.q_stacked_layout.widget(arg__1)
+            q_widget = self._q_stacked_layout.widget(arg__1)
 
             if q_widget is None:
                 return
 
-            return self.q_stacked_layout.removeWidget(q_widget)
+            return self._q_stacked_layout.removeWidget(q_widget)
 
         elif isinstance(arg__1, str):
             wr = self._name_to_q_widget.get(arg__1, None)
@@ -108,7 +108,7 @@ class Router(QWidget):
             if q_widget is None:
                 return
 
-            return self.q_stacked_layout.removeWidget(q_widget)
+            return self._q_stacked_layout.removeWidget(q_widget)
 
         raise TypeError()
 
@@ -126,10 +126,10 @@ class Router(QWidget):
 
     def to_route(self, arg__1: Any) -> None:
         if isinstance(arg__1, QWidget):
-            return self.q_stacked_layout.setCurrentWidget(arg__1)
+            return self._q_stacked_layout.setCurrentWidget(arg__1)
 
         elif isinstance(arg__1, int):
-            return self.q_stacked_layout.setCurrentIndex(arg__1)
+            return self._q_stacked_layout.setCurrentIndex(arg__1)
 
         elif isinstance(arg__1, str):
             wr = self._name_to_q_widget.get(arg__1, None)
@@ -142,43 +142,43 @@ class Router(QWidget):
             if q_widget is None:
                 return
 
-            return self.q_stacked_layout.setCurrentWidget(q_widget)
+            return self._q_stacked_layout.setCurrentWidget(q_widget)
         raise TypeError()
 
     def first(self) -> None:
-        if (self.q_stacked_layout.count() > 0) and (
-            self.q_stacked_layout.currentIndex() != 0
+        if (self._q_stacked_layout.count() > 0) and (
+            self._q_stacked_layout.currentIndex() != 0
         ):
-            self.q_stacked_layout.setCurrentIndex(0)
+            self._q_stacked_layout.setCurrentIndex(0)
 
     def prev(self) -> None:
-        index = self.q_stacked_layout.currentIndex()
-        count = self.q_stacked_layout.count()
+        index = self._q_stacked_layout.currentIndex()
+        count = self._q_stacked_layout.count()
 
         if index > 0 and index < count:
-            self.q_stacked_layout.setCurrentIndex((index - 1))
+            self._q_stacked_layout.setCurrentIndex((index - 1))
 
     def next(self) -> None:
-        index = self.q_stacked_layout.currentIndex()
-        count = self.q_stacked_layout.count()
+        index = self._q_stacked_layout.currentIndex()
+        count = self._q_stacked_layout.count()
 
         if index > -1 and index < (count - 1):
-            self.q_stacked_layout.setCurrentIndex((index + 1))
+            self._q_stacked_layout.setCurrentIndex((index + 1))
 
     def last(self) -> None:
-        count = self.q_stacked_layout.count()
+        count = self._q_stacked_layout.count()
 
         if count > 0:
-            self.q_stacked_layout.setCurrentIndex((count - 1))
+            self._q_stacked_layout.setCurrentIndex((count - 1))
 
     def currentWidget(self) -> Optional[QWidget]:
-        return self.q_stacked_layout.currentWidget()
+        return self._q_stacked_layout.currentWidget()
 
     def currentIndex(self) -> int:
-        return self.q_stacked_layout.currentIndex()
+        return self._q_stacked_layout.currentIndex()
 
     def currentName(self) -> Optional[str]:
-        q_widget = self.q_stacked_layout.currentWidget()
+        q_widget = self._q_stacked_layout.currentWidget()
 
         if q_widget is None:
             return
@@ -199,10 +199,10 @@ class Router(QWidget):
 
     def contains(self, arg__1: Any) -> bool:
         if isinstance(arg__1, QWidget):
-            return self.q_stacked_layout.indexOf(arg__1) != -1
+            return self._q_stacked_layout.indexOf(arg__1) != -1
 
         elif isinstance(arg__1, int):
-            return bool(self.q_stacked_layout.widget(arg__1))
+            return bool(self._q_stacked_layout.widget(arg__1))
 
         elif isinstance(arg__1, str):
             wr = self._name_to_q_widget.get(arg__1, None)
@@ -215,7 +215,7 @@ class Router(QWidget):
             if q_widget is None:
                 return False
 
-            return self.q_stacked_layout.indexOf(q_widget) != -1
+            return self._q_stacked_layout.indexOf(q_widget) != -1
 
         raise TypeError()
 
@@ -229,7 +229,7 @@ class Router(QWidget):
 
     def widget(self, arg__1: Any) -> Optional[QWidget]:
         if isinstance(arg__1, int):
-            return self.q_stacked_layout.widget(arg__1)
+            return self._q_stacked_layout.widget(arg__1)
 
         elif isinstance(arg__1, str):
             wr = self._name_to_q_widget.get(arg__1, None)
@@ -242,12 +242,12 @@ class Router(QWidget):
             if q_widget is None:
                 return
 
-            index = self.q_stacked_layout.indexOf(q_widget)
+            index = self._q_stacked_layout.indexOf(q_widget)
 
             if index == -1:
                 return
 
-            return self.q_stacked_layout.widget(index)
+            return self._q_stacked_layout.widget(index)
 
         raise TypeError()
 
@@ -261,7 +261,7 @@ class Router(QWidget):
 
     def index(self, arg__1: Any) -> int:
         if isinstance(arg__1, QWidget):
-            return self.q_stacked_layout.indexOf(arg__1)
+            return self._q_stacked_layout.indexOf(arg__1)
 
         elif isinstance(arg__1, str):
             wr = self._name_to_q_widget.get(arg__1, None)
@@ -274,7 +274,7 @@ class Router(QWidget):
             if q_widget is None:
                 return -1
 
-            return self.q_stacked_layout.indexOf(q_widget)
+            return self._q_stacked_layout.indexOf(q_widget)
 
         raise TypeError()
 
@@ -291,7 +291,7 @@ class Router(QWidget):
             return self._id_to_name.get(id(arg__1), None)
 
         elif isinstance(arg__1, int):
-            q_widget = self.q_stacked_layout.widget(arg__1)
+            q_widget = self._q_stacked_layout.widget(arg__1)
 
             if q_widget is None:
                 return
@@ -301,7 +301,7 @@ class Router(QWidget):
         raise TypeError()
 
     def count(self) -> int:
-        return self.q_stacked_layout.count()
+        return self._q_stacked_layout.count()
 
     @Slot(int)
     def _current_changed(self, index: int) -> None:
@@ -339,7 +339,7 @@ class Router(QWidget):
             if _q_widget is None:
                 continue
 
-            _index = self.q_stacked_layout.indexOf(_q_widget)
+            _index = self._q_stacked_layout.indexOf(_q_widget)
 
             if _index == -1:
                 continue
@@ -363,7 +363,7 @@ class Router(QWidget):
 
     @override
     def showEvent(self, event: QShowEvent) -> None:
-        if isinstance(self.default, str):
-            self.to_route(self.default)
+        if isinstance(self._default, str):
+            self.to_route(self._default)
 
         return super().showEvent(event)
