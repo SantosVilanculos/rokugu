@@ -20,6 +20,7 @@ class IconButton(Widget):
         elif isinstance(path, Path):
             path = path.as_posix()
 
+        self._aspect_ratio_mode = Qt.AspectRatioMode.KeepAspectRatio
         self.setAttribute(Qt.WidgetAttribute.WA_NoMousePropagation)
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.setSizePolicy(
@@ -31,21 +32,32 @@ class IconButton(Widget):
         q_v_box_layout.setSpacing(0)
         q_v_box_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.q_svg_widget = QSvgWidget(path)
-        self.q_svg_widget.renderer().setAspectRatioMode(
-            Qt.AspectRatioMode.KeepAspectRatio
+        self._q_svg_widget = QSvgWidget(path)
+        self._q_svg_widget.setAttribute(
+            Qt.WidgetAttribute.WA_TranslucentBackground
         )
-        self.q_svg_widget.setAttribute(
-            Qt.WidgetAttribute.WA_TranslucentBackground, True
-        )
-        self.q_svg_widget.setFixedSize(icon_size)
-        q_v_box_layout.addWidget(self.q_svg_widget)
+        self._q_svg_widget.setFixedSize(icon_size)
+        self._q_svg_renderer = self._q_svg_widget.renderer()
+        self._q_svg_renderer.setAspectRatioMode(self._aspect_ratio_mode)
+        q_v_box_layout.addWidget(self._q_svg_widget)
 
-    def load(self, path: str) -> None:
+    def load(self, path: Union[str, Path]) -> bool:
         if isinstance(path, Path):
             path = path.as_posix()
 
-        return self.q_svg_widget.load(path)
+        _ = self._q_svg_renderer.load(path)
+        self._q_svg_renderer.setAspectRatioMode(self._aspect_ratio_mode)
+        return _
+
+    def icon_size(self) -> QSize:
+        return self._q_svg_widget.size()
 
     def set_icon_size(self, q_size: QSize) -> None:
-        self.q_svg_widget.setFixedSize(q_size)
+        self._q_svg_widget.setFixedSize(q_size)
+
+    def aspect_ratio_mode(self) -> Qt.AspectRatioMode:
+        return self._q_svg_renderer.aspectRatioMode()
+
+    def set_aspect_ratio_mode(self, mode: Qt.AspectRatioMode) -> None:
+        self._q_svg_renderer.setAspectRatioMode(mode)
+        self._aspect_ratio_mode = mode
