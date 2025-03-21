@@ -25,6 +25,7 @@ watch:
 
 markdown_extensions:
   - attr_list
+  - pymdownx.tasklist
 
 plugins:
   - mkdocstrings:
