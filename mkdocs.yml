@@ -1,10 +1,10 @@
 # https://www.mkdocs.org/user-guide/configuration/
 
 site_name: Rokugu
-site_url: https://santosvilanculos.github.io/rokugu/
+site_url: https://rokugu.github.io
 
-repo_url: https://github.com/santosvilanculos/rokugu/
-repo_name: santosvilanculos/rokugu
+repo_url: https://github.com/rokugu/rokugu
+repo_name: rokugu/rokugu
 edit_uri: tree/main/docs
 
 site_author: Santos Vilanculos
