@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- (Placeholder) Future features and enhancements will be listed here.
+- Now you can set and get and text elide mode to `ElidedText` widget.
+  widget for setting and getting the text elide mode and.
+- Now you can get the current icon size, get and set the prefered aspect ratio mode on the `IconButton` widget.
+
+### Changed
+
+- `IconButton` load method now returns a boolean.
 
 ## [0.0.3] - 2025-03-19
 
