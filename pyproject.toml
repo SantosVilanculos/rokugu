@@ -53,6 +53,7 @@ doc = [
   "mkdocs-material==9.6.8",
   "mkdocstrings==0.29.0",
   "mkdocstrings-python==1.16.5",
+  "pymdown-extensions==10.14.3",
 ]
 
 [tool.setuptools]

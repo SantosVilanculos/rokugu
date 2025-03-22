@@ -26,6 +26,9 @@ watch:
 markdown_extensions:
   - attr_list
   - pymdownx.tasklist
+  - pymdownx.emoji
+  - pymdownx.mark
+  - pymdownx.tilde
 
 plugins:
   - mkdocstrings:
