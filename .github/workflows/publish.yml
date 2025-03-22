@@ -35,6 +35,7 @@ jobs:
           name: python-package-distributions
           path: dist/
           compression-level: 0
+          overwrite: true
 
   publish:
     name: Publish release to PyPI
