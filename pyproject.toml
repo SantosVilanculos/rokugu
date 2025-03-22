@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rokugu"
-version = "0.0.3"
+version = "0.0.4"
 description = "An opinionated PySide6 library that delivers ready-to-use components and utilities."
 readme = "README.md"
 authors = [{ name = "Santos Vilanculos", email = "santosvilanculos@yahoo.com" }]
