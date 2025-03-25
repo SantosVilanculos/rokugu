@@ -11,7 +11,8 @@ site_author: Santos Vilanculos
 site_description: An opinionated PySide6 library that delivers ready-to-use components and utilities.
 copyright: © 2025 Santos Vilanculos. All rights reserved.
 
-# exclude_docs:
+exclude_docs: |
+  requirements.txt
 
 theme:
   name: material
