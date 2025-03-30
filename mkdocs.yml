@@ -1,7 +1,6 @@
 # https://www.mkdocs.org/user-guide/configuration/
 
 site_name: Rokugu
-# site_url: https://rokugu.github.io
 
 repo_url: https://github.com/rokugu/rokugu
 repo_name: rokugu/rokugu
