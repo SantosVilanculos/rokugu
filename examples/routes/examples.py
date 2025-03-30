@@ -1,7 +1,7 @@
 from functools import cmp_to_key
 from typing import List
 
-from PySide6.QtCore import QSize, Signal
+from PySide6.QtCore import QSize, QXmlStreamReader, Signal
 from PySide6.QtGui import Qt
 from PySide6.QtSvgWidgets import QSvgWidget
 from PySide6.QtWidgets import (
@@ -17,7 +17,6 @@ from PySide6.QtWidgets import (
 )
 from routes.image_background_example import ImageBackgroundExample
 from routes.list_widget_example import ListWidgetExample
-from utils import asset
 
 from rokugu.widgets.list_widget import ListWidget
 from rokugu.widgets.router import Router
@@ -41,7 +40,26 @@ class S1(Widget):
         q_svg_widget.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
         q_svg_renderer = q_svg_widget.renderer()
         q_svg_renderer.setAspectRatioMode(Qt.AspectRatioMode.KeepAspectRatio)
-        q_svg_renderer.load(asset("images/search.svg").as_posix())
+        q_svg_renderer.load(
+            QXmlStreamReader(
+                """
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+            </svg>
+            """
+            )
+        )
         q_h_box_layout.addWidget(q_svg_widget)
         q_line_edit = QLineEdit()
         q_line_edit.textChanged.connect(self.text_changed.emit)
