@@ -26,7 +26,7 @@ dependencies = ["pendulum>=3.0.0", "psutil>=7.0.0", "PySide6>=6.8.2.1"]
 
 [project.urls]
 Homepage = "https://github.com/rokugu"
-# Documentation = ""
+Documentation = "https://rokugu.readthedocs.com"
 Repository = "https://github.com/rokugu/rokugu"
 "Bug Tracker" = "https://github.com/rokugu/rokugu/issues"
 Changelog = "https://github.com/rokugu/rokugu/blob/main/CHANGELOG.md"
