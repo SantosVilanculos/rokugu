@@ -3,4 +3,6 @@
 [![license](https://img.shields.io/github/license/rokugu/rokugu)](https://github.com/rokugu/rokugu/blob/main/LICENSE)
 [![pypi](https://img.shields.io/pypi/v/rokugu)](https://pypi.org/project/rokugu)
 
+An opinionated PySide6 library that delivers ready-to-use components and utilities.
+
 ![screenshot](https://raw.githubusercontent.com/rokugu/rokugu/main/screenshot.png)
