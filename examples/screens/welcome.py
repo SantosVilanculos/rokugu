@@ -1,11 +1,10 @@
 from platform import python_version
 
-from PySide6.QtCore import Signal, qVersion
+from PySide6.QtCore import qVersion
 from PySide6.QtGui import QFont, Qt
 from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
-    QPushButton,
     QSizePolicy,
     QVBoxLayout,
     QWidget,
@@ -15,7 +14,6 @@ from rokugu import Widget
 
 
 class Welcome(Widget):
-    continue_ = Signal()
 
     def __init__(self) -> None:
         super().__init__()
@@ -59,11 +57,5 @@ class Welcome(Widget):
         q_label.setWordWrap(True)
         q_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         q_v_box_layout.addWidget(q_label)
-        q_push_button = QPushButton("Continue")
-        q_push_button.setMaximumWidth(240)
-        q_push_button.setFixedHeight(36)
-        q_push_button.pressed.connect(self.continue_.emit)
-        q_v_box_layout.addWidget(
-            q_push_button, alignment=Qt.AlignmentFlag.AlignCenter
-        )
+
         q_h_box_layout.addWidget(q_widget)

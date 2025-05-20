@@ -1,6 +1,5 @@
 from PySide6.QtWidgets import QStackedLayout, QWidget
 from screens.examples import Examples
-from screens.welcome import Welcome
 
 
 class Root(QWidget):
@@ -8,11 +7,5 @@ class Root(QWidget):
         super().__init__()
 
         q_staked_layout = QStackedLayout(self)
-        welcome = Welcome()
-        q_staked_layout.addWidget(welcome)
         examples = Examples()
-        index = q_staked_layout.addWidget(examples)
-
-        welcome.continue_.connect(
-            lambda: q_staked_layout.setCurrentIndex(index)
-        )
+        q_staked_layout.addWidget(examples)

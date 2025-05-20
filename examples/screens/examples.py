@@ -19,6 +19,7 @@ from screens.ImageWidgetExample import ImageWidgetExample
 from screens.ListWidgetExample import ListWidgetExample
 from screens.Playground import Playground
 from screens.SvgWidgetExample import SvgWidgetExample
+from screens.welcome import Welcome
 
 from rokugu import ListWidget, StackWidget, Widget
 
@@ -75,6 +76,7 @@ class S2(ListWidget):
         super().__init__()
         self.setStyleSheet("QListWidget{border:0}")
 
+        self._add("Welcome", "welcome")
         self._add("Image Widget", "image")
         self._add("List Widget", "list")
         self._add("Svg Widget", "svg")
@@ -203,6 +205,7 @@ class Main(StackWidget):
         super().__init__()
 
         self.setStyleSheet("Router{border: 1px solid red}")
+        self.add("welcome", Welcome())
         self.add("image", ImageWidgetExample())
         self.add("list", ListWidgetExample())
         self.add("svg", SvgWidgetExample())
