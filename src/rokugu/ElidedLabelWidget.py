@@ -4,7 +4,7 @@ from PySide6.QtGui import QResizeEvent, QShowEvent, Qt
 from PySide6.QtWidgets import QLabel, QSizePolicy
 
 
-class ElidedText(QLabel):
+class ElidedLabelWidget(QLabel):
     def __init__(
         self,
         text: Optional[str] = None,

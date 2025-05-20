@@ -7,7 +7,7 @@ from PySide6.QtGui import QPainter, QPaintEvent, QPixmap
 from PySide6.QtWidgets import QWidget
 
 
-class ImageBackground(QWidget):
+class ImageWidget(QWidget):
     class ObjectFit(Enum):
         Contain = "contain"
         Cover = "cover"
@@ -28,16 +28,20 @@ class ImageBackground(QWidget):
         self._q_pixmap = QPixmap(path)
         self._object_fit = object_fit
 
-    def load(self, path: Union[Path, str]) -> None:
+    def load(self, path: Union[Path, str]) -> bool:
         if isinstance(path, Path):
             path = path.as_posix()
 
-        self._q_pixmap.load(path)
+        _ = self._q_pixmap.load(path)
+        self.repaint()
+        return _
+
+    def setObjectFit(self, value: ObjectFit) -> None:
+        self._object_fit = value
         self.repaint()
 
-    def set_object_fit(self, of: ObjectFit) -> None:
-        self._object_fit = of
-        self.repaint()
+    def objectFit(self) -> ObjectFit:
+        return self._object_fit
 
     @override
     def paintEvent(self, event: QPaintEvent) -> None:
@@ -46,7 +50,7 @@ class ImageBackground(QWidget):
 
         img_rect = self._q_pixmap.rect()
 
-        if self._object_fit == ImageBackground.ObjectFit.ScaleDown:
+        if self._object_fit == self.ObjectFit.ScaleDown:
             img_aspect = img_rect.width() / img_rect.height()
             widget_aspect = q_rect.width() / q_rect.height()
 
@@ -70,7 +74,7 @@ class ImageBackground(QWidget):
                 QRect(0, 0, scaled_width, scaled_height), self._q_pixmap
             )
 
-        elif self._object_fit == ImageBackground.ObjectFit.Contain:
+        elif self._object_fit == self.ObjectFit.Contain:
             img_aspect = img_rect.width() / img_rect.height()
             widget_aspect = q_rect.width() / q_rect.height()
 
@@ -87,7 +91,7 @@ class ImageBackground(QWidget):
                 QRect(x, y, scaled_width, scaled_height), self._q_pixmap
             )
 
-        elif self._object_fit == ImageBackground.ObjectFit.Cover:
+        elif self._object_fit == self.ObjectFit.Cover:
             img_aspect = img_rect.width() / img_rect.height()
             widget_aspect = q_rect.width() / q_rect.height()
 
@@ -104,7 +108,7 @@ class ImageBackground(QWidget):
                 QRect(x, y, scaled_width, scaled_height), self._q_pixmap
             )
 
-        elif self._object_fit == ImageBackground.ObjectFit.Fill:
+        elif self._object_fit == self.ObjectFit.Fill:
             q_painter.drawPixmap(
                 QRect(0, 0, q_rect.width(), q_rect.height()), self._q_pixmap
             )

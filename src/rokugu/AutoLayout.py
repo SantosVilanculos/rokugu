@@ -6,13 +6,10 @@ from PySide6.QtCore import QMargins, QRect, QSize, Qt
 from PySide6.QtWidgets import QLayout, QLayoutItem, QWidget
 
 
-# Grid
-class ResizeMode(Enum):
-    FILL = "auto-fill"
-    FIT = "auto-fit"
-
-
 class AutoLayout(QLayout):
+    class ResizeMode(Enum):
+        FILL = "auto-fill"
+        FIT = "auto-fit"
 
     def __init__(
         self,
@@ -153,7 +150,7 @@ class AutoLayout(QLayout):
         )
         max_possible_items = max(1, max_possible_items)
 
-        if self._resize_mode == ResizeMode.FIT:
+        if self._resize_mode == self.ResizeMode.FIT:
             items_per_row = min(max_possible_items, len(self._item_list))
             if items_per_row == 0:
                 items_per_row = 1

@@ -1,6 +1,3 @@
-
-
-
 def file_size(size_in_bytes: float, precision: int = 2) -> str:
     units = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
 

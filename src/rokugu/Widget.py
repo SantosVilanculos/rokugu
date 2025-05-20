@@ -35,11 +35,11 @@ class Widget(QWidget):
     def __init__(self) -> None:
         super().__init__()
 
-        self.q_timer = QTimer(self)
-        self.q_timer.setTimerType(Qt.TimerType.PreciseTimer)
-        self.q_timer.setSingleShot(True)
-        self.q_timer.setInterval(500)
-        self.q_timer.timeout.connect(self.long_pressed.emit)
+        self._q_timer = QTimer(self)
+        self._q_timer.setTimerType(Qt.TimerType.PreciseTimer)
+        self._q_timer.setSingleShot(True)
+        self._q_timer.setInterval(500)
+        self._q_timer.timeout.connect(self.long_pressed.emit)
 
     @override
     def paintEvent(self, event: QPaintEvent) -> None:
@@ -99,8 +99,8 @@ class Widget(QWidget):
     def leaveEvent(self, event: QEvent) -> None:
         self.hovered_out.emit(event)
 
-        if self.q_timer.isActive():
-            self.q_timer.stop()
+        if self._q_timer.isActive():
+            self._q_timer.stop()
 
         return super().leaveEvent(event)
 
@@ -118,7 +118,7 @@ class Widget(QWidget):
     def mousePressEvent(self, event: QMouseEvent) -> None:
         self.pressed_in.emit(event)
 
-        self.q_timer.start()
+        self._q_timer.start()
 
         return super().mousePressEvent(event)
 
@@ -126,8 +126,8 @@ class Widget(QWidget):
     def mouseReleaseEvent(self, event: QMouseEvent) -> None:
         self.pressed_out.emit(event)
 
-        if self.q_timer.isActive():
-            self.q_timer.stop()
+        if self._q_timer.isActive():
+            self._q_timer.stop()
 
         if self.rect().contains(event.pos()):
             self.clicked.emit()

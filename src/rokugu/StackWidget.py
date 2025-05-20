@@ -6,7 +6,7 @@ from PySide6.QtGui import QPainter, QPaintEvent, QShowEvent
 from PySide6.QtWidgets import QStackedLayout, QStyle, QStyleOption, QWidget
 
 
-class Router(QWidget):
+class StackWidget(QWidget):
     current_changed = Signal(int, str)
     widget_added = Signal(int, str)
     widget_removed = Signal(int, str)

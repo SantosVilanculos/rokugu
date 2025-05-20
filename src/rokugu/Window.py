@@ -7,8 +7,8 @@ class Window(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
 
-        q_shortcut = QShortcut(
+        ctrl_q = QShortcut(
             QKeySequence(Qt.KeyboardModifier.ControlModifier, Qt.Key.Key_Q),
             self,
         )
-        q_shortcut.activated.connect(QApplication.quit)
+        ctrl_q.activated.connect(QApplication.quit)
