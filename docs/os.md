@@ -1,0 +1,21 @@
+# OS
+
+::: os.name
+::: os.boot_unique_id
+::: os.build_abi
+::: os.build_cpu_architecture
+::: os.current_cpu_architecture
+::: os.kernel_type
+::: os.kernel_version
+::: os.machine_host_name
+::: os.machine_unique_id
+::: os.pretty_product_name
+::: os.product_type
+::: os.product_version
+::: os.boot_time
+::: os.up_time
+::: os.timezone
+::: os.locale
+::: os.encoding
+::: os.open_url
+::: os.open_path
