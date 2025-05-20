@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QApplication
 from root import Root
 from utils import asset
 
-from rokugu.widgets.window import Window
+from rokugu import Window
 
 
 def main() -> None:

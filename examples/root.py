@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QStackedLayout, QWidget
-from routes.examples import Examples
-from routes.welcome import Welcome
+from screens.examples import Examples
+from screens.welcome import Welcome
 
 
 class Root(QWidget):
