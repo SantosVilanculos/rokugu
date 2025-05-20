@@ -1,0 +1,86 @@
+name: Release
+
+on:
+  push:
+    tags: ["v[0-9]+.[0-9]+.[0-9]+*"]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: Build app
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, macos-13, windows-2019]
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12.5"
+
+      - name: Install dependencies for ${{ matrix.os }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install .[dev]
+
+      - name: Build with pyinstaller for Windows
+        if: ${{ runner.os == 'Windows' }}
+        run: pyinstaller --distpath="dist/$RUNNER_OS" --noconfirm --clean --onefile --name="Rokugu-Examples" --icon="icon.png" --add-data="icon.png:." --add-data="examples/assets:assets" --windowed --disable-windowed-traceback --uac-admin examples/main.py
+
+      - name: Build with pyinstaller for macOS
+        if: ${{ runner.os == 'macOS' }}
+        run: pyinstaller --distpath="dist/$RUNNER_OS" --noconfirm --clean --onefile --name="Rokugu-Examples" --icon="icon.png" --add-data="icon.png:." --add-data="examples/assets:assets" --windowed --disable-windowed-traceback examples/main.py
+
+      - name: Build with pyinstaller for Linux
+        if: ${{ runner.os == 'Linux' }}
+        run: pyinstaller --distpath="dist/$RUNNER_OS" --noconfirm --clean --onefile --name="Rokugu-Examples" --icon="icon.png" --add-data="icon.png:." --add-data="examples/assets:assets" --windowed examples/main.py
+
+      - name: Upload result job ${{ matrix.os }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ runner.os }}
+          path: dist/${{ runner.os }}
+          compression-level: 0
+          overwrite: false
+
+  upload:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - name: Zip file Windows
+        run: (cd ./dist/Windows && zip -r ./../../Rokugu-Examples-windows.zip ./*)
+
+      - name: Zip file Linux
+        run: (cd ./dist/Linux && zip -r ./../../Rokugu-Examples-linux.zip ./*)
+
+      - name: Zip file macOS
+        run: (cd ./dist/macOS && zip -r ./../../Rokugu-Examples-macos.zip ./*)
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          files: ./*.zip
